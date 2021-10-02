@@ -3,6 +3,7 @@ import { Container, Menu } from "semantic-ui-react";
 import '../styles/Home.module.css'
 import Link from "next/link";
 import { Font } from "../styles/Styling";
+import Microgrid from "./Modal";
 
 class Navbar extends Component {
   render() {
@@ -12,7 +13,7 @@ class Navbar extends Component {
         <Menu inverted pointing secondary>
           <Link href="/">
             <Menu.Item name="home">
-              <Font>HOME</Font>
+               <Font>HOME</Font>
             </Menu.Item>
           </Link>
           <Link href="/trades" >
@@ -28,6 +29,7 @@ class Navbar extends Component {
           </Link>
 
           <Menu.Menu position="right">
+            <Menu.Item><Microgrid/></Menu.Item>
             <Menu.Item>ENERGYSWAP</Menu.Item>
           </Menu.Menu>
         </Menu>

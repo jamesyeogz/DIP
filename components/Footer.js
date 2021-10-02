@@ -25,11 +25,11 @@ class Footer extends Component {
                     </Team_P>
                      <Team_P>
                      platform
-                    </Team_P>
+                      </Team_P>
                     <Team_P>
                     Provide a decentralised, open marketplace will allow prosumers
                     </Team_P>
-                    <Team_P>
+                     <Team_P>
                     to trade excess
                     </Team_P>
                     <Team_P>
