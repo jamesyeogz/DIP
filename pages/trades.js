@@ -15,7 +15,7 @@ import web3 from "../ethereum/web3";
 import { Router } from "next/router";
 import { Bidding_Header, Font } from "../styles/Styling";
 import styles from "../styles/Home.module.css";
-
+//Github Testing
 class EnergySaleIndex extends Component {
   static async getInitialProps() {
     const energySales = await factory.methods
