@@ -119,7 +119,7 @@ def check():
                 #LAddr[y]['status'] = x.send()
                 status = x.send()
                 status = json.loads(status)
-                print(status)
+                print(LAddr)
                 LAddr[y]['status'] = status['status']
                 LAddr[y]['Energy'] = status['Energy']
                 
@@ -134,9 +134,9 @@ def check():
     if request.method == 'GET':
         if(LAddr):
             
-            return make_response(str(LAddr))
+            return make_response(json.dumps(LAddr))
         else:
-            return make_response("No Connection Available")
+            return make_response(str("No Connection Available"))
 
 
 #  {
@@ -176,7 +176,7 @@ def bid():
 
             except:
                 traceback.print_exc()
-                return make_response("Fail At Connecting to Server")
+                return make_response(json.dumps(LAddr))
         return make_response(status)
 
 

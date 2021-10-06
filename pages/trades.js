@@ -69,12 +69,16 @@ class EnergySaleIndex extends Component {
         value: this.state.value,
       });
     } catch (err) {}
+
+    // The code for Energy Should be here but How to know if the contract has been filled
+
+    
   };
 
   renderEnergySales() {
     const items = this.props.energySales.map((address) => {
       return (
-        <Table.Row>
+        <Table.Row key={true}>
           <Table.Cell>{address}</Table.Cell>
           <Table.Cell>
             <Form
@@ -89,7 +93,7 @@ class EnergySaleIndex extends Component {
                 <Grid.Column width={8}>
                   <Form.Field>
                     <input
-                      placeholder="wei"
+                      placeholder="watts"
                       onChange={(event) =>
                         this.setState({ value: event.target.value })
                       }
