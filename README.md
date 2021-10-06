@@ -15,5 +15,5 @@ yarn dev
 There are a few Issues I would like to address:
 
 1. How to extract Contract Details from the Energy Sales
-2. You cannot go into the trading unless You're Inside Rinkeby Network( Alternatively, Just type localhost:3000/trading to see
-3. The table is still pretty ugly, Ill do something if i have time
+2. The table is still pretty ugly, Ill do something if i have time
+3. How do I know if the Bid request has been finalized?
