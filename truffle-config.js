@@ -1,4 +1,4 @@
-const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 const MNEMONIC = 'stereo gloom round lawsuit play heart ethics wonder flight culture visa journey';
 /**
  * Use this file to configure your truffle project. It's seeded with some
