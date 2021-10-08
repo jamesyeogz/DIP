@@ -8,7 +8,7 @@ import Microgrid from "./Modal";
 import Energy from './Energy'
 import web3 from "../ethereum/web3";
 
-
+//try 
 
 
 function Navbar() {
