@@ -6,9 +6,15 @@ export const Font = styled.div`
   font-family: "Press Start 2P", cursive;
 `;
 
+export const LogoFont = styled.div`
+  @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+
+  font-family: "Monoton", cursive;
+`;
+
 export const Container_Content = styled.div`
   background: ${({ bg }) => (bg ? "white" : "black")};
-  height: 100%;
+  height: 100%;s
   width: 100vw;
   text-align: center;
   text-justify: center;

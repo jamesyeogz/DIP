@@ -6,7 +6,7 @@ export default function Energy({amount}) {
 
   return (
     <>
-      <Font>Energy : {amount}</Font>
+      <Font>ENERGY : {amount}</Font>
     </>
   );
 }
