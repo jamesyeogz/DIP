@@ -14,7 +14,6 @@ import EnergySale from "../ethereum/energySale";
 import web3 from "../ethereum/web3";
 import { Bidding_Header, Font } from "../styles/Styling";
 import styles from "../styles/Home.module.css";
-<<<<<<< HEAD
 import BidForm from "../components/BidForm";
 import EnergySaleDetails from "../components/TradeDetails";
 import SellForm from "../components/SellForm";
@@ -22,9 +21,6 @@ import Complete from "../components/Complete";
 import MinBid from "../components/MinBid";
 import EnergySold from "../components/EnergySold";
 
-=======
-//Github Testing
->>>>>>> a261ae446c347f8a790f0df88ccc7efc8f7d5255
 class EnergySaleIndex extends Component {
   static async getInitialProps() {
     const energySales = await factory.methods
