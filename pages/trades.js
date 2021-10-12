@@ -12,9 +12,10 @@ import {
 } from "semantic-ui-react";
 import EnergySale from "../ethereum/energySale";
 import web3 from "../ethereum/web3";
-import { Router } from "next/router";
 import { Bidding_Header, Font } from "../styles/Styling";
 import styles from "../styles/Home.module.css";
+import BidForm from "../components/BidForm";
+import EnergySaleDetails from "../components/TradeDetails";
 
 class EnergySaleIndex extends Component {
   static async getInitialProps() {
@@ -47,7 +48,8 @@ class EnergySaleIndex extends Component {
           from: accounts[0],
         });
 
-    Router.pushRoute("/trades");
+      window.location.reload(false);
+
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -75,37 +77,17 @@ class EnergySaleIndex extends Component {
     
   };
 
+
   renderEnergySales() {
     const items = this.props.energySales.map((address) => {
+      
       return (
-        <Table.Row key={true}>
-          <Table.Cell>{address}</Table.Cell>
+        <Table.Row key={address}>
+          <Table.Cell> 
+            <EnergySaleDetails address = {address}/>
+          </Table.Cell>
           <Table.Cell>
-            <Form
-              onSubmit={() => {
-                this.setState({ address: address });
-                this.onSubmit;
-                console.log(this.state.address);
-                console.log(this.state.value);
-              }}
-            >
-              <Grid>
-                <Grid.Column width={8}>
-                  <Form.Field>
-                    <input
-                      placeholder="watts"
-                      onChange={(event) =>
-                        this.setState({ value: event.target.value })
-                      }
-                    />
-                  </Form.Field>
-                </Grid.Column>
-                <Grid.Column width={2}>
-                    
-                  <Button > <Font>Bid </Font></Button>
-                </Grid.Column>
-              </Grid>
-            </Form>
+            <BidForm address = {address}/>
           </Table.Cell>
         </Table.Row>
       );
@@ -127,7 +109,7 @@ class EnergySaleIndex extends Component {
               height: "100%",
             }}
           >
-            <Bidding_Header style={{ paddingTop: 40 }}>
+            <Bidding_Header style={{ paddingTop: 50 }}>
               CREATE NEW SALE
             </Bidding_Header>
 
@@ -137,7 +119,7 @@ class EnergySaleIndex extends Component {
                   onSubmit={this.onCreate}
                   error={!!this.state.errorMessage}
                 >
-                  <Form.Field width="8">
+                  <Form.Field width="7">
                     <label>Minimum Bid</label>
                     <Input
                       label="wei"
@@ -148,7 +130,7 @@ class EnergySaleIndex extends Component {
                       }
                     />
                   </Form.Field>
-                  <Form.Field width="8">
+                  <Form.Field width="7">
                     <label>Amount of energy to be sold</label>
                     <Input
                       label="watts"
@@ -187,14 +169,14 @@ class EnergySaleIndex extends Component {
           }}
         >
           <Container className={styles.container_special}>
-            <Font>
+            <Font style = {{fontSize: 20, marginLeft: '41%', marginTop: '-3%', marginBottom: '5%'}}>
               <p>OPEN BIDS</p>
             </Font>
             <Table celled selectable fixed>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Address</Table.HeaderCell>
-                  <Table.HeaderCell>Bid?</Table.HeaderCell>
+                  <Table.HeaderCell>ADDRESS</Table.HeaderCell>
+                  <Table.HeaderCell>BID</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>{this.renderEnergySales()}</Table.Body>
