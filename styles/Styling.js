@@ -6,11 +6,6 @@ export const Font = styled.div`
   font-family: "Press Start 2P", cursive;
 `;
 
-export const LogoFont = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
-
-  font-family: "Monoton", cursive;
-`;
 
 export const Container_Content = styled.div`
   background: ${({ bg }) => (bg ? "white" : "black")};
@@ -33,7 +28,7 @@ export const Team_Header = styled.h1`
 export const Font_Footer = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
   font-family: "Press Start 2P", cursive;
-  color: white;
+  color: black;
   height:100%;
   width: 100%;
   padding-top: 100px;

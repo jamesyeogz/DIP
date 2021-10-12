@@ -1,26 +1,19 @@
-import React, { Component } from 'react';
-import { Grid, Card } from 'semantic-ui-react';
+import React, { Component, useEffect, useState } from 'react';
 import EnergySale from '../ethereum/energySale';
 
-class EnergySaleDetails extends Component {
-    constructor(props) {
-        super(props);
-        this.address = this.props.address
-    }
+export default function EnergySaleDetails({address}) {
+    const [highestbid, setHighestbid] = useState(0)
 
-    static async getInitialProps(props) {
-        const energySale = EnergySale(this.address);
+    useEffect(async () => {
+        const energySale = EnergySale(address);
 
         const highestBid = await energySale.methods.highestBid().call();
-        console.log(highestBid)
-        return { highestBid };
-    }
 
-    render() {
-        return (
-            <div> {this.props.highestBid} </div>
-        );
-    }
+        setHighestbid(highestBid)
+    }, [highestbid]);
+
+    return (
+        <div>{highestbid}</div>
+    )
 }
 
-export default EnergySaleDetails;

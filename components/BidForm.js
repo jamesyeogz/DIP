@@ -36,10 +36,11 @@ class BidForm extends Component {
     render() {
         return (
             <Form onSubmit = {this.onSubmit} error = {!!this.state.errorMessage}>
+                <div style = {{paddingLeft: '3%'}}>
                 <Grid>
                     <Grid.Column width = {12}>
                         <Form.Field>
-                            <label> <h4>Amount to Bid</h4> </label>
+                            {/* <label> <h4>Amount to Bid</h4> </label> */}
                             <Input
                                 value = {this.state.value}
                                 onChange = { event => this.setState({ value: event.target.value })}
@@ -55,6 +56,7 @@ class BidForm extends Component {
                         </Button>
                     </Grid.Column>
                 </Grid>
+                </div>
             </Form>
         );
     }
