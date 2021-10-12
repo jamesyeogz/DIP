@@ -1,7 +1,9 @@
 import Head from "next/head";
-import { Button, Container, Grid, Icon, Image, Item, Step } from "semantic-ui-react";
+import { Button, Container, Grid, Icon, Image, Item, Step, Card, Reveal } from "semantic-ui-react";
 import styles from "../styles/Home.module.css";
 import { Font, Container_Content, Bidding_Header } from "../styles/Styling";
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div>
@@ -12,124 +14,114 @@ export default function Home() {
       </Head>
       <div className={styles.container} style={{marginTop: '-20px'}}>
         <div className={styles.imagebg}>
-          <div className={styles.container_inner}>
-            <Button inverted color="teal">
-              <Font>TRADE NOW</Font>
-            </Button>
-          </div>
+
         </div>
       </div>
-      <div className={styles.container}>
-        <Container_Content bg={true} style={{marginTop: '100px'}}>
-          <Container>
-            <Item.Group divided>
-              <Item>
-                <Item.Image
-                  size="medium"
-                  src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/8e2ee06e-e1ae-46e9-8732-6c06493347f4/d37ej5g-1904e422-1f42-4db3-a321-bc19a5ef6930.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzhlMmVlMDZlLWUxYWUtNDZlOS04NzMyLTZjMDY0OTMzNDdmNFwvZDM3ZWo1Zy0xOTA0ZTQyMi0xZjQyLTRkYjMtYTMyMS1iYzE5YTVlZjY5MzAuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.94GfpAYSXlbOW2ej7f0bfE8YgaT1w8hXy8UJOBAOQLE"
-                />
-                <Item.Content
-                  verticalAlign="middle"
-                  style={{'text-align': 'center'}}
-                
-                >
-                  <Font>
-                    <p style={{ fontSize: 20 }}> MAKE YOUR ENERGY WORK </p>
-                    <p style={{ fontSize: 20 }}> FOR YOU </p>
-                  </Font>
-                  <h4 style={{ fontSize: 20 }}>
-                    Simply put up your energy for bidding and earn{" "}
-                  </h4>
-                  <h4
-                    style={{
-                      fontSize: 20,
 
-                    }}
-                  >
-                    profits from it within a day!
-                  </h4>
-                </Item.Content>
-              </Item>
-            </Item.Group>
-          </Container>
-        </Container_Content>
+      <div style = {{color: 'white', textAlign: 'center', fontSize: 30, marginTop: '-20%'}}>
+            <Font style = {{marginBottom: '2%'}}>The ENERGY marketplace</Font>
+            <Font>you need is here.</Font>
       </div>
+
+      <div style = {{textAlign: 'center', marginTop: '10%'}}>
+      <Link href="/trades" >
+          <Button  size = 'huge'>
+                <Font>TRADE NOW</Font>
+          </Button>
+      </Link>
+      </div>
+
       <div className={styles.container}>
-      <Container_Content bg={true} >
-          <Container >
-            <Item.Group divided>
-              <Item>
-                <Item.Content
-                  verticalAlign="middle"
-                  style={{'text-align': 'center'}}
-                >
-                  <Font>
-                    <p style={{ fontSize: 20 }}> GUARANTEES PAYMENT </p>
-                    <p style={{ fontSize: 20 }}> THROUGH SMART CONTRACT </p>
-                    <p style={{ fontSize: 20 }}> </p>
-                  </Font>
-                  <h4 style={{ fontSize: 20 }}>
-                    Our backend automates all monetary and energy transactions
-                    to provide security to both parties
-                  </h4>
-                </Item.Content>
-                <Item.Image
-                  
-                  size="medium"
-                  src="https://thumbs.dreamstime.com/b/piggy-bank-money-pixel-art-cartoon-retro-game-style-set-108981342.jpg"
-                />
-              </Item>
-            </Item.Group>
-          </Container>
-        </Container_Content>
-      </div>
-      <div className={styles.container} style={{height: '400px'}}>
-      <Container_Content bg={true} >
+        <Container_Content bg={true} style={{marginTop: '22%'}}>  
           <Container>
-            <Item.Group divided >
+            <Card.Group itemsPerRow = {3}>
+
+              <Card>
+                <Image src = 'https://i.pinimg.com/736x/31/09/50/3109505fe2c7cfdbf451a4d73ac8ec93.jpg' wrapped ui = {false} />
+                <Card.Content>
+                  <Card.Header>
+                    <Font> GUARANTEES PAYMENT ON BOTH ENDS </Font>
+                  </Card.Header>
+                  <Card.Description>
+                    <h4> Our backend automates all monetary and energy transactions to provide security to both parties through the use of smart contracts </h4>
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+
+              <Card>
+                <Image src = 'https://img.freepik.com/free-vector/arcade-machine-with-soda-icon-illustration-technology-game-icon-concept-isolated-flat-cartoon-style_138676-1288.jpg?size=338&ext=jpg' wrapped ui = {false} />
+                <Card.Content>
+                  <Card.Header> 
+                    <Font> MAKE YOUR ENERGY WORK FOR YOU </Font>
+                  </Card.Header>
+                  <Card.Description>
+                    <h4> Simply put up your energy for bidding and earn profits from it within a day </h4>
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+
+              <Card>
+                <Image src = 'https://img.freepik.com/free-vector/cryotherapy-icon-with-cryosauna-vector_116137-1010.jpg?size=338&ext=jpg' wrapped ui = {false} />
+                <Card.Content>
+                  <Card.Header>
+                    <Font> MULTIPLE BIDS AVAILABLE </Font>
+                  </Card.Header>
+                  <Card.Description>
+                    <h4> Multiple bids to choose from to ensure everyone has a chance to obtain energy </h4>
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+            </Card.Group>
+          </Container>
+          
+          <div className={styles.middleimagebg} style = {{ marginTop: '10%' }}></div>
+
+          <Container style = {{marginTop: '9%'}} >
+            <Font style = {{ fontSize: 40, marginBottom: '11%', alignItems: 'center'}}> HOW IT WORKS </Font>
+            <Item.Group>
               <Item>
-                <Item.Image
-                
-                  style={{ marginTop: "-100px" }}
-                  size="medium"
-                  src="http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/6585cedd19b9913.png"
-                />
-                <Item.Content
-                  verticalAlign="small"
-                  style={{'text-align': 'center'}}
-                >
-                  <Font>
-                    <p style={{ fontSize: 20 }}> MULTIPLE BIDS AVAILABLE</p>
-                    <p style={{ fontSize: 20 }}> </p>
-                  </Font>
-                  <h4 style={{ fontSize: 20 }}>
-                    Multiple bids to choose from to ensure everyone{" "}
-                  </h4>
-                  <h4 style={{ fontSize: 20, marginTop: "-12px" }}>
-                    has a chance to obtain energy
-                  </h4>
+                <Item.Image size = 'medium' src = 'https://www.vippng.com/png/detail/178-1786001_pixel-mario-question-mark-block-super-mario-bros.png'/>
+                <Item.Content verticalAlign = 'middle' style = {{textAlign: 'left'}}>
+                  <Item.Header>
+                    <Font style = {{color: 'red'}}> AS A BUYER </Font>
+                  </Item.Header>
+                  <Item.Description>
+                    <h4>1. Place a bid above minimum bid and current highest bid value.</h4>
+                    <h4>2. Wait for seller to end transaction and energy will be automatically transferred to you. (provided you remained the highest bid till the end of sale)</h4>
+                  </Item.Description>
+                </Item.Content>
+              </Item>
+
+              <Item>
+                <Item.Image size = 'medium' src = 'https://www.vippng.com/png/detail/178-1786001_pixel-mario-question-mark-block-super-mario-bros.png'/>
+                <Item.Content verticalAlign = 'middle' style = {{textAlign: 'left'}}>
+                  <Item.Header>
+                    <Font style = {{color: 'red'}}> AS A SELLER </Font>
+                  </Item.Header>
+                  <Item.Description>
+                    <h4>1. Enter the minimum bid and amount of energy to be sold before creating new sale.</h4>
+                    <h4>2. Wait for buyers to bid and you can choose to end the transaction whenever you deem fit by clicking the sell button. Energy will be automatically transferred to buyer and the current highest bid value will be transferred to you. (Do note that only the address that created the energy sale can click the sell button, else there would be a transaction error)</h4>
+
+                  </Item.Description>
                 </Item.Content>
               </Item>
             </Item.Group>
           </Container>
         </Container_Content>
-   
+
       </div>
       <div className={styles.container_I}>
-      <div style = {{
-                            backgroundImage: 'url(https://cdn.pixabay.com/photo/2020/06/20/19/17/the-black-background-5322097_1280.jpg)', 
-                            backgroundSize: 'cover', 
-                            backgroundPosition: 'center', 
-                            width: '100%', 
-                            height: '100%'
-                        }}>
+      <div style = {{ marginTop: '100%' }}>
+  
+
+      
                           
-                            <Font style={{padding: '100px 0 0 0'}}>
+                            {/* <Font style={{padding: '100px 0 0 0'}}>
                                 <Bidding_Header colorchange={true}> How it works</Bidding_Header>
                                 <Bidding_Header > Buyer </Bidding_Header>
                             </Font>
                 <Container>
-                <Step.Group  size = 'medium' widths = '3'>
+                <Step.Group  size = 'massive' widths = '3'>
                     <Step>
                         <Icon name = 'pencil alternate'/>
                         <Step.Content>
@@ -185,8 +177,8 @@ export default function Home() {
                             <Step.Description>End sale and receive payment instantly through Metamask</Step.Description>
                         </Step.Content>
                     </Step>
-                </Step.Group>
-                </Container>
+                </Step.Group> */}
+                {/* </Container> */}
 
                 </div>
         

@@ -1,56 +1,61 @@
-
-
-.container_trade{
-    height:860px;
-    width: 100%;
+.container_trade {
+  height: 860px;
+  width: 100%;
 }
-.container{
-    height: 500px;
-    width: 100%;
-    min-width: 350px;
+.container {
+  height: 500px;
+  width: 100%;
+  min-width: 350px;
 
-    /*Why is inverted segment have a hole in between*/
-    /* margin-top: -20px; */
+  /*Why is inverted segment have a hole in between*/
+  /* margin-top: -20px; */
 }
-.Team_Content{
-    align-content: center;
+.Team_Content {
+  align-content: center;
 }
-.container_content{
-    height:100%;
-    width:100vw;
-    text-align: center; 
-    text-justify: center;
+.container_content {
+  height: 100%;
+  width: 100vw;
+  text-align: center;
+  text-justify: center;
 }
 
-.content_wrap{
-    margin: 0 100px 100px 100px;
+.content_wrap {
+  margin: 0 100px 100px 100px;
 }
 
-.container_inner{
-
-    height:100%;
-    width:100vw;
-    text-align: center; 
-    text-justify: center;
-    padding-top: 400px;
+.container_inner {
+  height: 100%;
+  width: 100vw;
+  text-align: center;
+  text-justify: center;
+  padding-top: 400px;
 }
 
-.Bidpage{
-    height: "auto";
-    background-image: url('../public/images/pacman.jpg');
-    background-size: "cover";
-    background-position: "center";
-
+.Bidpage {
+  height: "auto";
+  background-image: url("../public/images/pacman.jpg");
+  background-size: "cover";
+  background-position: "center";
 }
-.imagebg{
-    background-image: url("../public/images/ethereum-underwater.jpg");
-    background-position: center;
-    justify-self: center;
-    background-size: cover;
-    height:100%;
-    
+.imagebg {
+  background-image: url("https://images.schoolofmotion.com/w950/1b144fb3-fbde-43bc-9c1d-92bba0a6f490/CryptoArt_Article_Thumb_v2.png");
+  background-position: center;
+  justify-self: center;
+  background-size: cover;
+  min-height: 130%;
+  min-width: 1024px;
 }
 
-.container_special{
-    margin: 100px 100px;
+.middleimagebg {
+  background-image: url("https://lh3.googleusercontent.com/wMXrQd4wlhIXdQ_6oPmjarirWSZhSEtOeQyEoeoUQkPvNx1AsNU3m0lFLj9zCUX0ZjqLa_Xk-JzWUQ9xRGjlN9GLgIh-l8872Lx3GvI=h600");
+  background-position: center;
+  justify-self: center;
+  background-size: cover;
+  min-height: 90%;
+  min-width: 1024px;
+}
+
+.container_special {
+  margin: 100px 100px;
 }

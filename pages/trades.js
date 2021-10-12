@@ -16,6 +16,10 @@ import { Bidding_Header, Font } from "../styles/Styling";
 import styles from "../styles/Home.module.css";
 import BidForm from "../components/BidForm";
 import EnergySaleDetails from "../components/TradeDetails";
+import SellForm from "../components/SellForm";
+import Complete from "../components/Complete";
+import MinBid from "../components/MinBid";
+import EnergySold from "../components/EnergySold";
 
 class EnergySaleIndex extends Component {
   static async getInitialProps() {
@@ -83,11 +87,23 @@ class EnergySaleIndex extends Component {
       
       return (
         <Table.Row key={address}>
+          <Table.Cell>
+            <EnergySold address = {address} />
+          </Table.Cell>
           <Table.Cell> 
             <EnergySaleDetails address = {address}/>
           </Table.Cell>
           <Table.Cell>
+            <MinBid address = {address}/>
+          </Table.Cell>
+          <Table.Cell style = {{paddingTop: '2%'}} >
             <BidForm address = {address}/>
+          </Table.Cell>
+          <Table.Cell>
+            <SellForm address = {address}/>
+          </Table.Cell>
+          <Table.Cell>
+            <Complete address = {address}/>
           </Table.Cell>
         </Table.Row>
       );
@@ -169,18 +185,23 @@ class EnergySaleIndex extends Component {
           }}
         >
           <Container className={styles.container_special}>
-            <Font style = {{fontSize: 20, marginLeft: '41%', marginTop: '-3%', marginBottom: '5%'}}>
-              <p>OPEN BIDS</p>
+            <Font style = {{fontSize: 20, marginLeft: '45%', marginTop: '-3%', marginBottom: '5%'}}>
+              <p>BIDS</p>
             </Font>
-            <Table celled selectable fixed>
+            <Table celled selectable fixed textAlign = 'center' verticalAlign = 'center'>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>ADDRESS</Table.HeaderCell>
-                  <Table.HeaderCell>BID</Table.HeaderCell>
+                  <Table.HeaderCell width = {2}>ENERGY FOR SALE (WATTS)</Table.HeaderCell>
+                  <Table.HeaderCell width = {3}>CURRENT HIGHEST BID (WEI)</Table.HeaderCell>
+                  <Table.HeaderCell width = {2}>MINIMUM BID (WEI)</Table.HeaderCell>
+                  <Table.HeaderCell width = {6}>BID AMOUNT</Table.HeaderCell>
+                  <Table.HeaderCell width = {2}>END SALE (SELLER ONLY)</Table.HeaderCell>
+                  <Table.HeaderCell width = {2}>COMPLETE?</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>{this.renderEnergySales()}</Table.Body>
             </Table>
+            <h4 style = {{color: 'teal'}}>NOTE: If complete is set to true, you can no longer bid for that energy sale.</h4>
           </Container>
         </div>
       </div>
