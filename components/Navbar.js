@@ -32,7 +32,7 @@ function Navbar() {
   //       }
   //     } catch (error) {}
   //   }
-  // }, [data]);
+  // }, [status]]);
  
     return (
       
