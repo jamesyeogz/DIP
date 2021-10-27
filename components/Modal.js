@@ -1,48 +1,32 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Header, Input, Modal } from "semantic-ui-react";
 import web3 from "../ethereum/web3";
-import json from "json5";
 import { Font } from "../styles/Styling";
-export default function Microgrid({data, status, setStatus}) {
-  const [name, setName] = useState("");
-  const [port, setPort] = useState("");
+import api from './axios'
+
+
+export default function Microgrid({ blockchain , status}) {
+  const [port, setPort] = useState(5050);
   const [address, setAddress] = useState("");
   const [open, setOpen] = useState(false);
-  const [blockchain, setBlockchain] = useState("");
 
-  const list = {
-    name: name,
-    port: port,
-    address: address,
-    status: "Pending",
-    blockchain: blockchain,
-  };
+
+
+  const onSubmit = async (event) => {
+    await event.preventDefault()
+    const list = {
+      Address: blockchain,
+      IP: address,
+      Port: port,
+    };
+    console.log(list)
     try {
-
-      const data1 =  data.filter(
-        (a) => a.blockchain == blockchain && a.status == "Verified"
-      );
-      setAmount(data1[0].Energy);
-      setStatus(data1[0].status);
-    } catch (error) {}
-
-    // console.log(amount)
-  // }, []);
-
-  const onSubmit = async (e) => {
-    // await e.preventDefault()
-    await console.log(list);
-    // COMMENT: Start Server Before uncommenting below
-    const response = await fetch("http://127.0.0.1:5000/check", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(list),
-    });
-    const data1 = await response.text();
-    // const data = "Verified";
-    setStatus(data1);
+      const response = await api.post('/Mname/create', list)
+      console.log(response)
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -72,23 +56,16 @@ export default function Microgrid({data, status, setStatus}) {
                 <Form onSubmit={onSubmit}>
                   <Form.Field>
                     <Input
-                      placeholder="Owner of the Grid"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input
                       placeholder="IP Address"
                       value={address}
-                      onChange={(e) => setAddress(e.target.value)}
+                      onChange={(event) => setAddress(event.target.value)}
                     />
                   </Form.Field>
                   <Form.Field>
                     <Input
                       placeholder="Port Number"
                       value={port}
-                      onChange={(e) => setPort(e.target.value)}
+                      onChange={(event) => setPort(event.target.value)}
                     />
                   </Form.Field>
                 </Form>
@@ -102,8 +79,8 @@ export default function Microgrid({data, status, setStatus}) {
                 content="Yep, that's me"
                 labelPosition="right"
                 icon="checkmark"
-                onClick={() => {
-                  setOpen(false), onSubmit();
+                onClick={(event) => {
+                  setOpen(false), onSubmit(event);
                 }}
                 positive
               />

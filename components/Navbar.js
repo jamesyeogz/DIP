@@ -7,32 +7,33 @@ import { Font, LogoFont } from "../styles/Styling";
 import Microgrid from "./Modal";
 import Energy from './Energy'
 import web3 from "../ethereum/web3";
+import api from './axios'
+
 
 
 function Navbar() {
   const [blockchain, setBlockchain] = useState("");
   const [amount, setAmount] = useState(0);
   const [status, setStatus] = useState("Not Connected");
-  const data ={}
-  // useEffect(async () => {
-  //   const accounts = await web3.eth.getAccounts();
-  //   setBlockchain(accounts);
-  //   const res = await fetch("http://127.0.0.1:5000/check");
-  //   const data = await res.json();
-  //   if (data != "No Connection Available") {
-  //     try {
-  //       const data1 = data.filter(
-  //         (a) => a.blockchain == blockchain && a.status == "Verified"
-  //       );
-        //  console.log(data1[0].blockchain);
-  //       if (data1[0].blockchain == blockchain) {
-  //         setAmount(data1[0].Energy);
-  //         setStatus(data1[0].status)
-            
-  //       }
-  //     } catch (error) {}
-  //   }
-  // }, [status]]);
+  useEffect(async() =>{
+    const accounts = await web3.eth.getAccounts();
+    setBlockchain(accounts[0])
+    const response = await api.post('/Mname/', { Address: accounts[0] })
+    console.log(response.data)
+    const data = response.data
+    if ( data == "No Connections"){
+    }
+    else if (data == "Fail At Connecting to Server"){
+      setStatus(data)
+    }
+    else{
+      setAmount(data)
+      setStatus("Verified")
+    }
+    
+    
+    
+  },[amount])
  
     return (
       
@@ -57,7 +58,7 @@ function Navbar() {
 
           <Menu.Menu position="right" >
             <Menu.Item style = {{marginLeft: '-10%'}}><Energy amount={amount} /></Menu.Item>
-            <Menu.Item style = {{marginLeft: '5%'}}><Microgrid data={data} status={status} setStatus={setStatus}/></Menu.Item>
+            <Menu.Item style = {{marginLeft: '5%'}}><Microgrid blockchain={blockchain} status={status}/></Menu.Item>
           </Menu.Menu>
         </Menu>
       </div>

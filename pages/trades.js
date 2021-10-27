@@ -20,6 +20,7 @@ import SellForm from "../components/SellForm";
 import Complete from "../components/Complete";
 import MinBid from "../components/MinBid";
 import EnergySold from "../components/EnergySold";
+import api from '../components/axios'
 
 class EnergySaleIndex extends Component {
   static async getInitialProps() {
@@ -46,13 +47,25 @@ class EnergySaleIndex extends Component {
 
     try {
       const accounts = await web3.eth.getAccounts();
-      await factory.methods
+       const hi =  await factory.methods
         .createEnergySale(this.state.minimumBid, this.state.energy)
         .send({
           from: accounts[0],
         });
-
-      window.location.reload(false);
+      const NewSale = await factory.methods
+        .getDeployedEnergySalesAddresses()
+        .call();
+      const lastElement = NewSale[NewSale.length - 1];
+      
+      const response = await api.post('/list', {
+        Contract_Address: lastElement,
+        Buyer_Address: "None",
+        Seller_Address: accounts[0],
+        Amount: this.state.energy,
+        Completed: false
+    })
+    console.log(response)
+    window.location.reload(false);
 
     } catch (err) {
       this.setState({ errorMessage: err.message });

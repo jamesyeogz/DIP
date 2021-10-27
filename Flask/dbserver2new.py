@@ -6,7 +6,7 @@ import threading
 from flask.helpers import make_response
 
 HEADER = 64
-PORT = 5050
+PORT = 5051
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
@@ -77,11 +77,11 @@ def handle_client(conn, addr):
                             status = s.send()
                             conn.send(status.encode(FORMAT))
                             if status == "Successful":
-                                with open('server1.json', "r") as f:
+                                with open('server2.json', "r") as f:
                                     data = json.load(f)
                                     Esend = int(msg['Amount'])
                                     data['Energy'] = data['Energy'] - Esend
-                                jsonFile= open("server1.json", 'w')
+                                jsonFile= open("server2.json", 'w')
                                 jsonFile.write(json.dumps(data, indent=2))
                             d = client_send(msg['Server'], FORMAT,
                                             msg['Port'], DISCONNECT_MESSAGE)
@@ -98,19 +98,21 @@ def handle_client(conn, addr):
                         # By Right Your suppose to send UDP to the OpalRT server from here
                     elif msg['Action'] == 'Receive':
                         # Well This is also wat your suppose to send
-                        print("Hello1")
-                elif msg['status']:
-                    with open('server1.json', 'r') as f:
-                        data = json.load(f)
-                        name = str(data['Name'])
-                        if msg['name'] == name:
-
-                            # Your Suppose to Write the code inside here
-                            print("Correct")
-                            conn.send("Verified".encode(FORMAT))
-
-                        else:
-                            conn.send("Verification Failed".encode(FORMAT))
+                        print(msg) 
+                        with open('server2.json', "r") as f:
+                            data = json.load(f)
+                            Esend = int(msg['Amount'])
+                            data['Energy'] = data['Energy'] + Esend
+                        jsonFile= open("server2.json", 'w')
+                        jsonFile.write(json.dumps(data, indent=2))
+                    elif msg['Action'] == 'GetInfo':
+                        with open('server2.json', 'r') as f:
+                            data = json.load(f)
+                            amount = str(data['Energy'])
+                            return_stats ={
+                                'Energy' : amount
+                            }
+                            conn.send(json.dumps(return_stats).encode(FORMAT))
 
                 else:
                     print(" There is an error with the msg")
