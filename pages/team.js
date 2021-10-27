@@ -12,25 +12,35 @@ import { Container, Button, Card, Image } from "semantic-ui-react";
 export default class team extends Component {
     render() {
         return (
-            <div>
+            <div >
                 <Container style = {{marginBottom: '5%', marginTop: '5%'}}>
                     <Card.Group itemsPerRow = {3}>
                         <Card>
-                            <Image src = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d8544m9-7c6aa0c6-8aed-4f72-8950-bf60ae1a7786.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDg1NDRtOS03YzZhYTBjNi04YWVkLTRmNzItODk1MC1iZjYwYWUxYTc3ODYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g6LFfBBHyzrclKRvX-UFHnjVhaa1ZQW_Vp5VD6i62k0' wrapped ui = {false} />
-                            <Card.Content textAlign = 'center'>
+                            <Image src = 'https://ethereum.org/static/ddb9a22d53fdaaae70c0a0d94577f2aa/31987/eth.png' wrapped ui = {false} />
+                            <Card.Content>
                                 <Card.Header><Font> OUR TEAM </Font></Card.Header>
                                 <Card.Description>
-                                    <h4>We are a group of Crypto developers providing a secure , reliable and automated energy trading platform for you. You can now trade energy with ease and rely on the blockchain technology to increase security of transactions. </h4>
+                                    <h4>We are a group of Crypto developers providing a secure , reliable and automated energy trading platform for you. </h4>
                                 </Card.Description>
                             </Card.Content>
                         </Card>
 
                         <Card>
-                            <Image src = 'https://image.freepik.com/vetores-gratis/pacote-de-pixelated-redes-sociais-icones_23-2147572515.jpg' wrapped ui = {false} />
-                            <Card.Content textAlign = 'center'>
-                                <Card.Header><Font> JOIN US TODAY </Font></Card.Header>
+                            <Image src = 'https://ethereum.org/static/17d9060291d90c60006b558c4267a5fa/acce7/wallet-cropped.png' wrapped ui = {false} />
+                            <Card.Content>
+                                <Card.Header><Font> JOIN US </Font></Card.Header>
                                 <Card.Description>
                                     <h4> Connect with us on our social media sites to keep up to date with our latest news! </h4>
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+
+                        <Card>
+                            <Image src = 'https://d33wubrfki0l68.cloudfront.net/33556a68ac5a84d9fcb0c3b8e1c8fbd414ef429d/68d98/static/e7a074a56d991c4f9e65857bafa0f053/ee604/what-is-ethereum.png' wrapped ui = {false} />
+                            <Card.Content>
+                                <Card.Header><Font> CONTRIBUTE </Font></Card.Header>
+                                <Card.Description>
+                                    <h4> Connect with us and let us know how we can improve our services to better cater to everyone.  </h4>
                                 </Card.Description>
                             </Card.Content>
                         </Card>

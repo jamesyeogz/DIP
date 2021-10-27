@@ -15,13 +15,13 @@ import EnergySale from "../ethereum/energySale";
 import web3 from "../ethereum/web3";
 import { Bidding_Header, Font } from "../styles/Styling";
 import styles from "../styles/Home.module.css";
-import BidForm from "../components/BidForm";
 import EnergySaleDetails from "../components/TradeDetails";
+import SellForm from "../components/SellForm";
 import Complete from "../components/Complete";
-import MinBid from "../components/MinBid";
 import EnergySold from "../components/EnergySold";
+import SellerAddress from "../components/Seller";
 
-class EnergySaleIndex extends Component {
+class Account extends Component {
   static async getInitialProps() {
     const energySales = await factory.methods
       .getDeployedEnergySalesAddresses()
@@ -37,6 +37,7 @@ class EnergySaleIndex extends Component {
     energy: "",
     errorMessage: "",
     loading: false,
+    complete: false, 
     items: [],
     isLoaded: true
   };
@@ -86,7 +87,11 @@ class EnergySaleIndex extends Component {
   componentDidMount() { 
     const isValid = async (address) => { 
       const status =  await EnergySale(address).methods.complete().call() 
-      return !status; 
+      const seller = await EnergySale(address).methods.seller().call()
+      const accounts = await web3.eth.getAccounts();
+      console.log(accounts)
+      const isSeller = !status && (seller == accounts)
+      return isSeller; 
     } 
     
     const shouldFilter =  Promise.all(this.props.energySales.map(isValid)).then((results) =>  { 
@@ -96,6 +101,7 @@ class EnergySaleIndex extends Component {
   }
 
 
+
   render() {
     return (
       <div>
@@ -103,9 +109,9 @@ class EnergySaleIndex extends Component {
           <div
             style={{
               backgroundImage:
-                "url(https://strangecomforts.com/wp-content/uploads/2021/02/ethereum-art.jpg)",
+                "url(https://horizon.io/assets/skyweaver.jpg)",
               backgroundSize: "cover",
-              backgroundPosition: "top",
+              backgroundPosition: "bottom",
               width: "100%",
               height: "120%",
             }}
@@ -117,8 +123,8 @@ class EnergySaleIndex extends Component {
             </Container>
 
             <Bidding_Header style = {{marginTop: '3%'}}>
-                <Form    
-                  size = 'mini'
+              <div styles={styles.testing}>
+                <Form
                   onSubmit={this.onCreate}
                   error={!!this.state.errorMessage}
                 >
@@ -146,7 +152,7 @@ class EnergySaleIndex extends Component {
                   </Form.Field>
                   <Container>
                   <Message
-                    size='medium'
+                    size='mini'
                     error
                     content={this.state.errorMessage}
                   />
@@ -157,14 +163,14 @@ class EnergySaleIndex extends Component {
                     basic
                     color = 'yellow'
                     inverted
-                    style={{ marginTop: "30px"}}
+                    style={{ marginTop: "30px" }}
                   >
                     <Font family="Press Start 2P">
                       <p>SUBMIT</p>
                     </Font>
                   </Button>
                 </Form>
-              
+              </div>
             </Bidding_Header>
           </div>
         </div>
@@ -174,37 +180,37 @@ class EnergySaleIndex extends Component {
           }}
         >
           <Container className={styles.container_special}>
-            <Font style = {{fontSize: 20, marginLeft: '45%', marginTop: '15%', marginBottom: '5%'}}>
-              <p>BIDS</p>
+            <Font style = {{fontSize: 20, marginLeft: '35%', marginTop: '15%', marginBottom: '5%'}}>
+              <p>YOUR ENERGY SALES</p>
             </Font>
             <Table celled selectable fixed textAlign = 'center' verticalAlign = 'center'>
               <Table.Header>
                 <Table.Row>
+                  <Table.HeaderCell width = {5}>Seller Address</Table.HeaderCell>
                   <Table.HeaderCell width = {2}>ENERGY FOR SALE (WATTS)</Table.HeaderCell>
                   <Table.HeaderCell width = {3}>CURRENT HIGHEST BID (WEI)</Table.HeaderCell>
-                  <Table.HeaderCell width = {2}>MINIMUM BID (WEI)</Table.HeaderCell>
-                  <Table.HeaderCell width = {6}>BID AMOUNT</Table.HeaderCell>
+                  <Table.HeaderCell width = {2}>END SALE</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
-              {this.state.isLoaded ? (<Loader />) : (
+              {this.state.isLoaded ? (<Loader/>) : (
               <Table.Body> {this.state.items.map((address) => { 
                 console.log(address) 
                 return ( 
                 <> 
-                  <Table.Row key={address[1]}>
-                    <Table.Cell>
-                      <EnergySold address = {address[1]} />
-                    </Table.Cell>
-                    <Table.Cell> 
-                      <EnergySaleDetails address = {address[1]}/>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <MinBid address = {address[1]}/>
-                    </Table.Cell>
-                    <Table.Cell style = {{paddingTop: '2%'}} >
-                      <BidForm address = {address[1]}/>
-                    </Table.Cell>
-                  </Table.Row>
+                <Table.Row key={address[1]} > 
+                  <Table.Cell> 
+                    <SellerAddress address = {address[1]} /> 
+                  </Table.Cell> 
+                  <Table.Cell> 
+                    <EnergySold address = {address[1]} /> 
+                  </Table.Cell> 
+                  <Table.Cell>  
+                    <EnergySaleDetails address = {address[1]}/> 
+                  </Table.Cell> 
+                  <Table.Cell> 
+                    <SellForm address = {address[1]}/> 
+                  </Table.Cell> 
+                </Table.Row> 
                 </>)} 
               )}             
               </Table.Body>
@@ -217,4 +223,5 @@ class EnergySaleIndex extends Component {
   }
 }
 
-export default EnergySaleIndex;
+export default Account;
+

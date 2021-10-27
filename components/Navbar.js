@@ -48,10 +48,16 @@ function Navbar() {
               <Font style = {{marginLeft: '20%'}}>TRADES</Font>
             </Menu.Item>
           </Link>
+
+          <Link href="/portfolio">
+            <Menu.Item>
+              <Font style = {{marginLeft: '20%'}}>PORTFOLIO</Font>
+            </Menu.Item>
+          </Link>
  
           <Link href="/team">
             <Menu.Item>
-              <Font style = {{marginLeft: '25%'}}>TEAM</Font>
+              <Font style = {{marginLeft: '50%'}}>TEAM</Font>
             </Menu.Item>
           </Link>
 
