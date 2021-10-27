@@ -22,6 +22,7 @@ function Navbar() {
     console.log(response.data)
     const data = response.data
     if ( data == "No Connections"){
+      console.log(data)
     }
     else if (data == "Fail At Connecting to Server"){
       setStatus(data)
