@@ -172,8 +172,18 @@ def bid():
                 x = connect(ADDR, 'utf-8', PORT_ADDR, json.dumps(req_msg))
                 status = x.send()
                 print(status)      
-
-
+                if LAddr:
+                    for i in range(0, len(LAddr)):
+                        Au = LAddr[i]['address']
+                        Pu = LAddr[i]['port']
+                        print(ADDR)
+                        print(PORT_ADDR)
+                        if str(ADDR) == Au and str(PORT_ADDR) == Pu:
+                            LAddr[i]['Energy'] = int(LAddr[i]['Energy']) - int(msg['Amount'])
+                            print(LAddr)
+                        elif req_msg['Server'] == LAddr[i]['address'] and req_msg['Port'] == LAddr[i]['port']:
+                            LAddr[i]['Energy'] = LAddr[i]['Energy'] + msg['Amount']
+                            print(LAddr)
             except:
                 traceback.print_exc()
                 return make_response(json.dumps(LAddr))

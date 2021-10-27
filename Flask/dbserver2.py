@@ -1,4 +1,5 @@
 import json
+from os import write
 import traceback
 import socket
 import threading
@@ -6,7 +7,7 @@ import threading
 from flask.helpers import make_response
 
 HEADER = 64
-PORT = 5050
+PORT = 5051
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
@@ -77,11 +78,11 @@ def handle_client(conn, addr):
                             status = s.send()
                             conn.send(status.encode(FORMAT))
                             if status == "Successful":
-                                with open('server1.json', "r") as f:
+                                with open('server2.json', "r") as f:
                                     data = json.load(f)
                                     Esend = int(msg['Amount'])
                                     data['Energy'] = data['Energy'] - Esend
-                                jsonFile= open("server1.json", 'w')
+                                jsonFile= open("server2.json", 'w')
                                 jsonFile.write(json.dumps(data, indent=2))
                             d = client_send(msg['Server'], FORMAT,
                                             msg['Port'], DISCONNECT_MESSAGE)
@@ -103,10 +104,12 @@ def handle_client(conn, addr):
                             data = json.load(f)
                             Esend = int(msg['Amount'])
                             data['Energy'] = data['Energy'] + Esend
-                        jsonFile= open("server2.json", 'w')
-                        jsonFile.write(json.dumps(data, indent=2))
+                        with open("server2.json", 'w') as a:
+                            a.write(json.dumps(data, indent=2))
+                        conn.send("Success".encode(FORMAT))
+                        break
                 elif msg['status']:
-                    with open('server1.json', 'r') as f:
+                    with open('server2.json', 'r') as f:
                         data = json.load(f)
                         name = str(data['Name'])
                         if msg['name'] == name:
