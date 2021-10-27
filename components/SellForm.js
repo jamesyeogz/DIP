@@ -29,9 +29,13 @@ class SellForm extends Component {
       seller_blockchain: seller
     });
 
-      const response = api.post('/list/fulfill', {Contract_Address: this.props.address})
+      const response = api.post('/fulfill/', {Contract_Address: this.props.address})
       console.log(response)
-      window.location.reload(false);
+      const accounts = await web3.eth.getAccounts();
+      await energySale.methods.sell().send({
+         from: accounts[0],
+      });
+      
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }

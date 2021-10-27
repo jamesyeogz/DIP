@@ -7,6 +7,6 @@ urlpatterns=[
     path('Mname/', MList.as_view(), name='MicroGridcheck'),
     path('Mname/create', MListCreate.as_view(), name='MicrogridCreate'),
     path('list/', BidList.as_view(), name='listcreate'),
-    path('list/<str:Contract_Address>/', Update.as_view(), name="UpdateList"),
-    path('list/fulfill', Fulfil.as_view(), name="Fulfil")
+    path('list/<str:Contract_Address>', Update.as_view(), name="UpdateList"),
+    path('fulfill/', Fulfil.as_view(), name="Fulfill")
 ]

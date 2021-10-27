@@ -2,7 +2,6 @@ import socket
 import json
 import traceback
 DISCONNECT_MESSAGE = "!DISCONNECT"
-
 class connect:
     def __init__(self, SERVER, FORMAT, PORT, message):
         self.ADDR = (SERVER, PORT)
@@ -75,7 +74,7 @@ def SendEnergy(Buyer, Seller, Contract):
 
 
 test = {
-    "IP" : "192.168.1.60",
+    "IP" : "169.254.115.82",
     "Port": 5050,
 }
 
@@ -84,9 +83,9 @@ Seller = {'id': 3, 'Address': 'James', 'IP': '192.168.1.60', 'Port': 5050}
 Contract ={'id': 1, 'Contract_Address': 'abc', 'Buyer_Address': 'James', 'Seller_Address': 'Chee Kien', 'Amount': 10, 'Time': '2021-10-23T18:25:33Z', 'Completed': False}
 
 
-
-status = SendEnergy(Buyer, Seller, Contract)
-print(status)
+print(Getinfo(test))
+# status = SendEnergy(Buyer, Seller, Contract)
+# print(status)
 
 hi ={
     "Contract_Address" : "abc"

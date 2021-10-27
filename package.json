@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^0.23.0",
+    "axios": "^0.24.0",
     "next": "11.1.2",
     "next-routes": "^1.4.2",
     "react": "17.0.2",
@@ -18,11 +18,11 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.4",
     "styled-components": "^5.3.1",
+    "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.6.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2",
-    "http-proxy-middleware": "^2.0.1"
+    "eslint-config-next": "11.1.2"
   }
 }
