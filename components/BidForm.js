@@ -24,7 +24,7 @@ class BidForm extends Component {
         from: accounts[0],
         value: this.state.value,
       });
-      const get = await api.get(`/list/${energySale}`);
+      const get = await api.get(`/list/${this.props.address}`);
       const data = get.data;
 
       const list = {

@@ -28,8 +28,13 @@ class SellForm extends Component {
       sender_blockchain: highestBidderAddress,
       seller_blockchain: seller
     });
+    const accounts = await web3.eth.getAccounts();
+    await energySale.methods.sell().send({
+       from: accounts[0],
+    });
 
-      const response = api.post('/list/fulfill', {Contract_Address: this.props.address})
+      
+      const response = await api.post('fulfill', {Contract_Address: this.props.address})
       console.log(response)
       window.location.reload(false);
     } catch (err) {

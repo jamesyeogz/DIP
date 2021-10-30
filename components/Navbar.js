@@ -18,7 +18,7 @@ function Navbar() {
   useEffect(async() =>{
     const accounts = await web3.eth.getAccounts();
     setBlockchain(accounts[0])
-    const response = await api.post('/Mname/', { Address: accounts[0] })
+    const response = await api.post('/Mname', { Address: accounts[0] })
     console.log(response.data)
     const data = response.data
     if ( data == "No Connections"){
