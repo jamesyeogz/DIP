@@ -7,12 +7,27 @@ from flask.helpers import make_response
 
 HEADER = 64
 PORT = 5050
-SERVER = socket.gethostbyname(socket.gethostname())
-ADDR = (SERVER, PORT)
+
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 print(socket.gethostname())
 
+print("Name: ")
+name = input()
+print("Amount: ")
+amount = int(input())
+print("(Leave Blank if None)Server Address: ")
+server_addr = input()
+if server_addr == "":
+    SERVER = socket.gethostbyname(socket.gethostname())
+else:
+    SERVER = server_addr
+Mgrid ={
+    "Name" : name,
+    "Amount" : amount
+}
+# SERVER = socket.gethostbyname(socket.gethostname())
+ADDR = (SERVER, PORT)
 
 class client_send:
     def __init__(self, SERVER, FORMAT, PORT, message):
@@ -32,13 +47,11 @@ class client_send:
             client.send(send_length)
             client.send(message)
             print(client.recv(2048)) 
-        
         sending(self.message)
-        return("Successful")
 
 
 active_conn = []
-num = -1
+num = 0
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
@@ -78,15 +91,16 @@ def handle_client(conn, addr):
                             status = s.send()
                             conn.send(status.encode(FORMAT))
                             if status == "Successful":
-                                with open('server1.json', "r") as f:
-                                    data = json.load(f)
-                                    Esend = int(msg['Amount'])
-                                    data['Energy'] = data['Energy'] - Esend
-                                jsonFile= open("server1.json", 'w')
-                                jsonFile.write(json.dumps(data, indent=2))
-                            d = client_send(msg['Server'], FORMAT,
-                                            msg['Port'], DISCONNECT_MESSAGE)
-                            d.send()
+                                Mgrid['Amount'] = int(Mgrid['Amount']) - int(msg['Amount'])
+                                # with open('server1.json', "r") as f:
+                                #     data = json.load(f)
+                                #     Esend = int(msg['Amount'])
+                                #     data['Energy'] = data['Energy'] - Esend
+                                # jsonFile= open("server1.json", 'w')
+                                # jsonFile.write(json.dumps(data, indent=2))
+                            # d = client_send(msg['Server'], FORMAT,
+                            #                 msg['Port'], DISCONNECT_MESSAGE)
+                            # d.send()
                         
                         # return  make_response("Success")
 
@@ -100,16 +114,18 @@ def handle_client(conn, addr):
                     elif msg['Action'] == 'Receive':
                         # Well This is also wat your suppose to send
                         print(msg) 
-                        with open('server1.json', "r") as f:
-                            data = json.load(f)
-                            Esend = int(msg['Amount'])
-                            data['Energy'] = data['Energy'] + Esend
-                        jsonFile= open("server1.json", 'w')
-                        jsonFile.write(json.dumps(data, indent=2))
+                        Mgrid['Amount'] = int(Mgrid['Amount']) + int(msg['Amount'])
+                        conn.send("Succesful".encode(FORMAT))
+                        # with open('server1.json', "r") as f:
+                        #     data = json.load(f)
+                        #     Esend = int(msg['Amount'])
+                        #     data['Energy'] = data['Energy'] + Esend
+                        # jsonFile= open("server1.json", 'w')
+                        # jsonFile.write(json.dumps(data, indent=2))
                     elif msg['Action'] == 'GetInfo':
-                        with open('server1.json', 'r') as f:
-                            data = json.load(f)
-                            amount = str(data['Energy'])
+                        # with open('server1.json', 'r') as f:
+                            # data = json.load(f)
+                            amount = str(Mgrid['Amount'])
                             return_stats ={
                                 'Energy' : amount
                             }

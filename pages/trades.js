@@ -57,7 +57,7 @@ class EnergySaleIndex extends Component {
         .call();
       const lastElement = NewSale[NewSale.length - 1];
       
-      const response = await api.post('/list', {
+      const response = await api.post('/list/', {
         Contract_Address: lastElement,
         Buyer_Address: "None",
         Seller_Address: accounts[0],

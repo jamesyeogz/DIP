@@ -1,5 +1,4 @@
 import json
-from os import write
 import traceback
 import socket
 import threading
@@ -8,12 +7,27 @@ from flask.helpers import make_response
 
 HEADER = 64
 PORT = 5051
-SERVER = socket.gethostbyname(socket.gethostname())
-ADDR = (SERVER, PORT)
+
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 print(socket.gethostname())
 
+print("Name: ")
+name = input()
+print("Amount: ")
+amount = int(input())
+print("(Leave Blank if None)Server Address: ")
+server_addr = input()
+if server_addr == "":
+    SERVER = socket.gethostbyname(socket.gethostname())
+else:
+    SERVER = server_addr
+Mgrid ={
+    "Name" : name,
+    "Amount" : amount
+}
+# SERVER = socket.gethostbyname(socket.gethostname())
+ADDR = (SERVER, PORT)
 
 class client_send:
     def __init__(self, SERVER, FORMAT, PORT, message):
@@ -64,6 +78,7 @@ def handle_client(conn, addr):
                 active_conn.pop(num)
             elif msg == int:
                 print("You got the number")
+
             else:
                 msg = json.loads(msg)
                 if msg['Action']:
@@ -78,15 +93,16 @@ def handle_client(conn, addr):
                             status = s.send()
                             conn.send(status.encode(FORMAT))
                             if status == "Successful":
-                                with open('server2.json', "r") as f:
-                                    data = json.load(f)
-                                    Esend = int(msg['Amount'])
-                                    data['Energy'] = data['Energy'] - Esend
-                                jsonFile= open("server2.json", 'w')
-                                jsonFile.write(json.dumps(data, indent=2))
-                            d = client_send(msg['Server'], FORMAT,
-                                            msg['Port'], DISCONNECT_MESSAGE)
-                            d.send()
+                                Mgrid['Amount'] = int(Mgrid['Amount']) - int(msg['Amount'])
+                                # with open('server1.json', "r") as f:
+                                #     data = json.load(f)
+                                #     Esend = int(msg['Amount'])
+                                #     data['Energy'] = data['Energy'] - Esend
+                                # jsonFile= open("server1.json", 'w')
+                                # jsonFile.write(json.dumps(data, indent=2))
+                            # d = client_send(msg['Server'], FORMAT,
+                            #                 msg['Port'], DISCONNECT_MESSAGE)
+                            # d.send()
                         
                         # return  make_response("Success")
 
@@ -98,28 +114,27 @@ def handle_client(conn, addr):
 
                         # By Right Your suppose to send UDP to the OpalRT server from here
                     elif msg['Action'] == 'Receive':
-                        # Well This is also wat your suppose to send
                         print(msg) 
-                        with open('server2.json', "r") as f:
-                            data = json.load(f)
-                            Esend = int(msg['Amount'])
-                            data['Energy'] = data['Energy'] + Esend
-                        with open("server2.json", 'w') as a:
-                            a.write(json.dumps(data, indent=2))
-                        conn.send("Success".encode(FORMAT))
-                        break
-                elif msg['status']:
-                    with open('server2.json', 'r') as f:
-                        data = json.load(f)
-                        name = str(data['Name'])
-                        if msg['name'] == name:
+                        Mgrid['Amount'] = int(Mgrid['Amount']) + int(msg['Amount'])
+                        conn.send("Succesful".encode(FORMAT))
+                        connected = False
+                        num -= 1
+                        active_conn.pop(num)
 
-                            # Your Suppose to Write the code inside here
-                            print("Correct")
-                            conn.send("Verified".encode(FORMAT))
-
-                        else:
-                            conn.send("Verification Failed".encode(FORMAT))
+                        # with open('server1.json', "r") as f:
+                        #     data = json.load(f)
+                        #     Esend = int(msg['Amount'])
+                        #     data['Energy'] = data['Energy'] + Esend
+                        # jsonFile= open("server1.json", 'w')
+                        # jsonFile.write(json.dumps(data, indent=2))
+                    elif msg['Action'] == 'GetInfo':
+                        # with open('server1.json', 'r') as f:
+                            # data = json.load(f)
+                            amount = str(Mgrid['Amount'])
+                            return_stats ={
+                                'Energy' : amount
+                            }
+                            conn.send(json.dumps(return_stats).encode(FORMAT))
 
                 else:
                     print(" There is an error with the msg")

@@ -79,15 +79,16 @@ test = {
     "Port": 5050,
 }
 
-Buyer = {'id': 4, 'Address': 'Chee Kien', 'IP': '192.168.1.60', 'Port': 5051}
-Seller = {'id': 3, 'Address': 'James', 'IP': '192.168.1.60', 'Port': 5050}
+Buyer = {'id': 4, 'Address': 'Chee Kien', 'IP': '192.168.1.60', 'Port': 5050}
+Seller = {'id': 3, 'Address': 'James', 'IP': '192.168.1.60', 'Port': 5051}
 Contract ={'id': 1, 'Contract_Address': 'abc', 'Buyer_Address': 'James', 'Seller_Address': 'Chee Kien', 'Amount': 10, 'Time': '2021-10-23T18:25:33Z', 'Completed': False}
 
 
 
 status = SendEnergy(Buyer, Seller, Contract)
 print(status)
-
+h1 = Getinfo(test)
+print(h1)
 hi ={
     "Contract_Address" : "abc"
 }
