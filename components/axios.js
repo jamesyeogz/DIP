@@ -6,7 +6,7 @@ const api = axios.create({
   baseURL: baseURL,
      headers: {
      "X-Requested-With": "XMLHttpRequest",
-     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Request-Headers": "*",
    },
 });
 
