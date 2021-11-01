@@ -3,8 +3,6 @@ import traceback
 import socket
 import threading
 
-from flask.helpers import make_response
-
 HEADER = 64
 PORT = 5050
 
@@ -46,8 +44,9 @@ class client_send:
             send_length += b' ' * (HEADER -len(send_length))
             client.send(send_length)
             client.send(message)
-            print(client.recv(2048)) 
-        sending(self.message)
+            status = client.recv(2048)
+            return(status)
+        return sending(self.message)
 
 
 active_conn = []
@@ -89,9 +88,12 @@ def handle_client(conn, addr):
 
                             #LAddr[y]['status'] = x.send()
                             status = s.send()
+                            status = status.decode(FORMAT)
+                          #  status = "b'Successful'"
                             conn.send(status.encode(FORMAT))
                             if status == "Successful":
                                 Mgrid['Amount'] = int(Mgrid['Amount']) - int(msg['Amount'])
+                                conn.send("Successful".encode(FORMAT))
                                 # with open('server1.json', "r") as f:
                                 #     data = json.load(f)
                                 #     Esend = int(msg['Amount'])
@@ -115,7 +117,7 @@ def handle_client(conn, addr):
                         # Well This is also wat your suppose to send
                         print(msg) 
                         Mgrid['Amount'] = int(Mgrid['Amount']) + int(msg['Amount'])
-                        conn.send("Succesful".encode(FORMAT))
+                        conn.send("Successful".encode(FORMAT))
                         # with open('server1.json', "r") as f:
                         #     data = json.load(f)
                         #     Esend = int(msg['Amount'])
