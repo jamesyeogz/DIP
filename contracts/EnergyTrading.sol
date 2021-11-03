@@ -45,7 +45,7 @@ contract EnergySale {
     }
 
     function bid() public payable {
-        require(msg.value > minimumContribution && msg.value > highestBid);
+        require(msg.value >= minimumContribution && msg.value > highestBid);
 
         highestBidderAddress.transfer(highestBid);
         highestBid = msg.value;

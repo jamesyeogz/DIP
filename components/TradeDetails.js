@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import EnergySale from '../ethereum/energySale';
+import web3 from '../ethereum/web3';
 
 export default function EnergySaleDetails({address}) {
     const [highestbid, setHighestbid] = useState(0)
@@ -13,7 +14,7 @@ export default function EnergySaleDetails({address}) {
     }, [highestbid]);
 
     return (
-        <div>{highestbid}</div>
+        <div>{web3.utils.fromWei(`${highestbid}`, 'ether')}</div>
     )
 }
 

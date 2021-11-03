@@ -22,7 +22,7 @@ class BidForm extends Component {
       const accounts = await web3.eth.getAccounts();
       await energySale.methods.bid().send({
         from: accounts[0],
-        value: this.state.value,
+        value: web3.utils.toWei(this.state.value, 'ether'),
       });
       const get = await api.get(`/list/${this.props.address}`);
       const data = get.data;
@@ -57,7 +57,7 @@ class BidForm extends Component {
                   onChange={(event) =>
                     this.setState({ value: event.target.value })
                   }
-                  label="wei"
+                  label="eth"
                   labelPosition="right"
                 />
               </Form.Field>

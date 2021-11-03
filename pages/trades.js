@@ -87,7 +87,7 @@ class EnergySaleIndex extends Component {
       const accounts = await web3.eth.getAccounts();
       await energySale.methods.bid().send({
         from: accounts[0],
-        value: this.state.value,
+        value: web3.utils.toWei(this.state.value, 'ether'),
       });
     } catch (err) {}
 
@@ -138,7 +138,7 @@ class EnergySaleIndex extends Component {
                   <Form.Field width="5" style = {{textAlign: 'left', marginLeft: '34.5%'}}>
                     <label style = {{ color: 'white', fontSize: 12 }}><Font> MINIMUM BID </Font></label>
                     <Input
-                      label="wei"
+                      label="eth"
                       labelPosition="right"
                       value={this.state.minimumBid}
                       onChange={(event) =>
@@ -194,8 +194,8 @@ class EnergySaleIndex extends Component {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell width = {2}>ENERGY FOR SALE (WATTS)</Table.HeaderCell>
-                  <Table.HeaderCell width = {3}>CURRENT HIGHEST BID (WEI)</Table.HeaderCell>
-                  <Table.HeaderCell width = {2}>MINIMUM BID (WEI)</Table.HeaderCell>
+                  <Table.HeaderCell width = {3}>CURRENT HIGHEST BID (ETH)</Table.HeaderCell>
+                  <Table.HeaderCell width = {2}>MINIMUM BID (ETH)</Table.HeaderCell>
                   <Table.HeaderCell width = {6}>BID AMOUNT</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
