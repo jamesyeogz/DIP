@@ -34,7 +34,7 @@ class BidForm extends Component {
         Amount: data['Amount'],
         Completed: false
       };
-      const response = api.put(`/list/${this.props.address}`, list)
+      const response = await api.put(`/list/${this.props.address}`, list)
       console.log(response)
       window.location.reload(false);
     } catch (err) {
